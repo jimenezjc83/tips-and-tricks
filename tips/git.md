@@ -40,7 +40,16 @@ Gestion de commits
 
 Remover branches locales que ya no existan remotamente
 ------------------------------------------------------
+
+**Linux:**
+```sh
 * git fetch -p && for branch in `git branch -vv | grep ': gone]' | gawk '{print $1}'`; do git branch -D $branch; done
+```
+
+**Mac:**
+```sh
+* git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
+```
 
 Cambiar el autor del ultimo commit
 ----------------------------------
@@ -59,8 +68,11 @@ Eliminar tags remotos
 
 Lista de branch recientemente modificados
 -----------------------------------------
+```sh
 * for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r
+```
 
 Limpiar workspace incluyendo cambios y archivos/directorios creados
 -------------------------------------------------------------------
 * git clean -f -d
+* git clean -xfd (Limpia archivos dentro del .gitignore, agregar n para hacer un dry run)
